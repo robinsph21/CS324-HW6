@@ -5,12 +5,17 @@
 #include "eqsubsets.h"
 
 bool eq_subsets(int set[], int len) {
-    // If L has at least one non-positive integer, return false
-	// T = sum of elements in L
-	// If T is odd, return false
-	// N = L.length
-	// EQ_SUBSETS_R(L, N, T/2)		// see if there is a subset that totals T/2
-    return true;
+    // Declare function variables
+    int sum = 0;
+    // If set has at least one non-positive integer, return false
+    for(int i = 0; i < len; i++) {
+        if(set[i] <= 0) { return false; }
+        sum += set[i];
+    }
+	// If sum is odd, return false
+    if(sum % 2 == 1) { return false; }
+	// Otherwise, see if there is a subset that totals T/2
+    return eq_subsets_recusive(set, len, sum / 2);
 }
 
 bool eq_subsets_recusive(int set[], int len, int target) {
@@ -32,10 +37,10 @@ int main(int argc, char const *argv[]) {
     int set3[] = {4, 5, 6, 11, 120, 4};	// should return false
 
     // Test the sets
-    if(eq_subsets(set0, 5)) { printf("Set 0 passed\n"); } else { printf("Set 0 failed\n"); }
-    if(!eq_subsets(set1, 4)) { printf("Set 1 passed\n"); } else { printf("Set 1 failed\n"); }
-    if(eq_subsets(set2, 6)) { printf("Set 2 passed\n"); } else { printf("Set 2 failed\n"); }
-    if(!eq_subsets(set0, 7)) { printf("Set 3 passed\n"); } else { printf("Set 3 failed\n"); }
+    if(   eq_subsets(set0, 5) ) { printf("Set 0 passed\n"); } else { printf("Set 0 failed\n"); }
+    if( ! eq_subsets(set1, 4) ) { printf("Set 1 passed\n"); } else { printf("Set 1 failed\n"); }
+    if(   eq_subsets(set2, 6) ) { printf("Set 2 passed\n"); } else { printf("Set 2 failed\n"); }
+    if( ! eq_subsets(set3, 7) ) { printf("Set 3 passed\n"); } else { printf("Set 3 failed\n"); }
 
     return EXIT_SUCCESS;
 }
