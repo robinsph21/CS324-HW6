@@ -24,14 +24,16 @@ bool eq_subsets(int set[], int len, bool dynamic_programming) {
 }
 
 bool eq_subsets_recusive(int set[], int len, int target) {
-    // 	If S == 0, return true                          // we have found a subset (empty) that adds to 0
-    // 	If N==0 and S > 0, return false                 // out of elements and S > 0
-    // 	If S < 0, return false                          // S < 0, so nothing left in sum
-    // 	If L[N-1] > S, return EQ_SUBSETS_R(L, N-1, S)   // too big to put in subset
-    // 	return EQ_SUBSETS_R(L, N-1, S) || EQ_SUBSETS_R(L, N-1, S – L[N-1])
-     		// first call does not put element in subset
-            // second call puts element in subset
-    return true;
+    // If target is 0, we have found a subset that adds to 0
+    if(target == 0) { return true; }
+    // No more elements elements and target is non-zero, so there was no correct config
+    if(len == 0 && target > 0) { return false; }
+    // target is less than 0, so there's nothing left in sum, so no correct config
+    if(target < 0) { return false; }
+    // If an element is too big, don't put it in the subset, keep going
+    if(set[len-1] > target) { return eq_subsets_recusive(set, len-1, target); }
+    // Recursive case: Find out if any configuration works
+    return eq_subsets_recusive(set, len-1, target) || eq_subsets_recusive(set, len-1, set[len-1]);
 }
 
 bool eq_subsets_dynamicprogramming(int set[], int len) {
