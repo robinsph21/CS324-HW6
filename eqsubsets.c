@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include "eqsubsets.h"
 
 bool eq_subsets(int set[], int len) {
     // If L has at least one non-positive integer, return false
@@ -9,7 +10,7 @@ bool eq_subsets(int set[], int len) {
 	// If T is odd, return false
 	// N = L.length
 	// EQ_SUBSETS_R(L, N, T/2)		// see if there is a subset that totals T/2
-    return eq_subsets_recusive({}, 0, 0);
+    return true;
 }
 
 bool eq_subsets_recusive(int set[], int len, int target) {
