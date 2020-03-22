@@ -7,7 +7,7 @@
 bool eq_subsets(int set[], int len, bool dynamic_programming) {
     if(dynamic_programming) {
         // Just call the dynamic programming function
-        eq_subsets_dynamicprogramming(set, len);
+        return eq_subsets_dynamicprogramming(set, len);
     } else {
         // Declare function variables
         int sum = 0;
@@ -66,10 +66,10 @@ int main(int argc, char const *argv[]) {
     int set3[] = {4, 5, 6, 11, 120, 4};	// should return false
 
     // Test the sets
-    if(   eq_subsets(set0, 5, ) ) { printf("Set 0 passed\n"); } else { printf("Set 0 failed\n"); }
-    if( ! eq_subsets(set1, 4) ) { printf("Set 1 passed\n"); } else { printf("Set 1 failed\n"); }
-    if(   eq_subsets(set2, 6) ) { printf("Set 2 passed\n"); } else { printf("Set 2 failed\n"); }
-    if( ! eq_subsets(set3, 7) ) { printf("Set 3 passed\n"); } else { printf("Set 3 failed\n"); }
+    if(   eq_subsets(set0, 5, dp) ) { printf("Set 0 passed\n"); } else { printf("Set 0 failed\n"); }
+    if( ! eq_subsets(set1, 4, dp) ) { printf("Set 1 passed\n"); } else { printf("Set 1 failed\n"); }
+    if(   eq_subsets(set2, 6, dp) ) { printf("Set 2 passed\n"); } else { printf("Set 2 failed\n"); }
+    if( ! eq_subsets(set3, 7, dp) ) { printf("Set 3 passed\n"); } else { printf("Set 3 failed\n"); }
 
     return EXIT_SUCCESS;
 }
