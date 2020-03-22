@@ -33,7 +33,10 @@ bool eq_subsets_recusive(int set[], int len, int target) {
     // If an element is too big, don't put it in the subset, keep going
     if(set[len-1] > target) { return eq_subsets_recusive(set, len-1, target); }
     // Recursive case: Find out if any configuration works
-    return eq_subsets_recusive(set, len-1, target) || eq_subsets_recusive(set, len-1, set[len-1]);
+    return (
+        eq_subsets_recusive(set, len-1, target) ||
+        eq_subsets_recusive(set, len-1, target - set[len-1])
+    );
 }
 
 bool eq_subsets_dynamicprogramming(int set[], int len) {
