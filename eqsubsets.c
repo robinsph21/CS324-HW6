@@ -1,3 +1,4 @@
+//authors: Philip Robinson and Hayden Liao
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -79,11 +80,13 @@ bool eq_subsets_dynamicprogramming(int set[], int len, int sum) {
         }
     }
 
+    print_table(len, (sum/2)+1, set, table);
+    return table[sum/2][len];
+}
 
-    //print the table
-
+void print_table(int len, int height, int set[], bool table[height][len]){
     //print values
-    printf("\t\t");
+    printf("\t-\t");
     for(int j=0; j<len; j++){
         printf("%d\t", set[j]);
     }
@@ -99,7 +102,7 @@ bool eq_subsets_dynamicprogramming(int set[], int len, int sum) {
 
     //print table contents
     int j=0;
-    for(int i=0; i<(sum/2)+1; i++){
+    for(int i=0; i<height; i++){
         printf("%d\t", i);
         for(j=0; j<len+1; j++){
             if(table[i][j]==true){
@@ -110,9 +113,6 @@ bool eq_subsets_dynamicprogramming(int set[], int len, int sum) {
         }
         printf("\n");
     }
-
-
-    return table[sum/2][len];
 }
 
 
@@ -121,15 +121,15 @@ int main(int argc, char const *argv[]) {
     bool dp = true;
 
     // Create the sets
-    // int set0[] = {3, 1, 5, 9, 12};		// should return true
-    // int set1[] = {10, 7, 4, 8};		    // should return false
-    // int set2[] = {4, 5, 1, 11, 10, 3};  // should return true
+    int set0[] = {3, 1, 5, 9, 12};		// should return true
+    int set1[] = {10, 7, 4, 8};		    // should return false
+    int set2[] = {4, 5, 1, 11, 10, 3};  // should return true
     int set3[] = {4, 5, 6, 11, 120, 4};	// should return false
 
     // Test the sets
-    // if(   eq_subsets(set0, 5, dp) ) { printf("Set 0 passed\n"); } else { printf("Set 0 failed\n"); }
-    // if(   eq_subsets(set1, 4, dp) ) { printf("Set 1 passed\n"); } else { printf("Set 1 failed\n"); }
-    // if(   eq_subsets(set2, 6, dp) ) { printf("Set 2 passed\n"); } else { printf("Set 2 failed\n"); }
+    if(   eq_subsets(set0, 5, dp) ) { printf("Set 0 passed\n"); } else { printf("Set 0 failed\n"); }
+    if(   eq_subsets(set1, 4, dp) ) { printf("Set 1 passed\n"); } else { printf("Set 1 failed\n"); }
+    if(   eq_subsets(set2, 6, dp) ) { printf("Set 2 passed\n"); } else { printf("Set 2 failed\n"); }
     if(   eq_subsets(set3, 6, dp) ) { printf("Set 3 passed\n"); } else { printf("Set 3 failed\n"); }
 
     return EXIT_SUCCESS;
