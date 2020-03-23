@@ -66,40 +66,28 @@ bool eq_subsets_dynamicprogramming(int set[], int len, int sum) {
                                         // sums to i without item j-1
             // can have a subset that sums to i if we had a subset without
                 // item j-1 that sums to (i-set[j-1])
+
+            // second condition: if table[i][j-1] is true, the following should not overwrite it
             if(i>=set[j-1] && table[i][j-1] == false){
-                if(i>=14 && j>=4){
-                    //looking at bottom right corner
-                    // printf("i: %d\t j: %d\n", i, j);
-                    // printf("set[j-1]: %d\n", set[j-1]);
-                    // printf("table[i-set[j-1]][j-1]: %c\n", table[i-set[j-1]][j-1]==true ? 'T' : 'F');
-                }
-                if(i==3 && j==2){
-                    //row 3
-                    // printf("i: %d\t j: %d\n", i, j);
-                    // printf("set[j-1]: %d\n", set[j-1]);
-                    // printf("table[i-set[j-1]][j-1]: %c\n", table[i-set[j-1]][j-1]==true ? 'T' : 'F');
-                }
                 table[i][j] = table[i-set[j-1]][j-1];
             }
         }
     }
 
-/*
+
     //print the table
-    printf("rows: i, potential sum\n");
-    printf("columns: j, index of set\n");
 
     //print values
-    printf("    ");
+    printf("\t\t");
     for(int j=0; j<len; j++){
-        printf("%d ", set[j]);
+        printf("%d\t", set[j]);
     }
     printf("\n");
 
     //print indices
-    printf("  ");
+    printf("\t");
     for(int j=0; j<len+1; j++){
-        printf("%d ", j);
+        printf("%d\t", j);
     }
     printf("\n");
 
@@ -107,17 +95,17 @@ bool eq_subsets_dynamicprogramming(int set[], int len, int sum) {
     //print table contents
     int j=0;
     for(int i=0; i<(sum/2)+1; i++){
-        printf("%d ", i);
+        printf("%d\t", i);
         for(j=0; j<len+1; j++){
             if(table[i][j]==true){
-                printf("T ");
+                printf("T\t");
             } else {
-                printf("F ");
+                printf("F\t");
             }
         }
         printf("\n");
     }
-    */
+
 
     return table[sum/2][len];
 }
@@ -128,15 +116,15 @@ int main(int argc, char const *argv[]) {
     bool dp = true;
 
     // Create the sets
-    int set0[] = {3, 1, 5, 9, 12};		// should return true
-    int set1[] = {10, 7, 4, 8};		    // should return false
-    int set2[] = {4, 5, 1, 11, 10, 3};  // should return true
+    // int set0[] = {3, 1, 5, 9, 12};		// should return true
+    // int set1[] = {10, 7, 4, 8};		    // should return false
+    // int set2[] = {4, 5, 1, 11, 10, 3};  // should return true
     int set3[] = {4, 5, 6, 11, 120, 4};	// should return false
 
     // Test the sets
-    if(   eq_subsets(set0, 5, dp) ) { printf("Set 0 passed\n"); } else { printf("Set 0 failed\n"); }
-    if(   eq_subsets(set1, 4, dp) ) { printf("Set 1 passed\n"); } else { printf("Set 1 failed\n"); }
-    if(   eq_subsets(set2, 6, dp) ) { printf("Set 2 passed\n"); } else { printf("Set 2 failed\n"); }
+    // if(   eq_subsets(set0, 5, dp) ) { printf("Set 0 passed\n"); } else { printf("Set 0 failed\n"); }
+    // if(   eq_subsets(set1, 4, dp) ) { printf("Set 1 passed\n"); } else { printf("Set 1 failed\n"); }
+    // if(   eq_subsets(set2, 6, dp) ) { printf("Set 2 passed\n"); } else { printf("Set 2 failed\n"); }
     if(   eq_subsets(set3, 6, dp) ) { printf("Set 3 passed\n"); } else { printf("Set 3 failed\n"); }
 
     return EXIT_SUCCESS;
